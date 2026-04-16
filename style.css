@@ -1,0 +1,99 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Arial;
+  background: #0f172a;
+  color: #e2e8f0;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background: #020617;
+  border-bottom: 1px solid #1e293b;
+}
+
+h1 {
+  color: #22c55e;
+}
+
+.saldo-box {
+  font-size: 18px;
+  background: #020617;
+  padding: 10px 20px;
+  border-radius: 10px;
+  border: 1px solid #1e293b;
+}
+
+main {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+}
+
+section {
+  flex: 1;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 15px;
+}
+
+.card {
+  background: #020617;
+  padding: 15px;
+  border-radius: 12px;
+  border: 1px solid #1e293b;
+  transition: 0.2s;
+}
+
+.card:hover {
+  transform: scale(1.02);
+}
+
+.nome {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.preco {
+  margin: 10px 0;
+  font-size: 16px;
+}
+
+.variacao.up {
+  color: #22c55e;
+}
+
+.variacao.down {
+  color: #ef4444;
+}
+
+button {
+  margin-top: 5px;
+  padding: 6px 10px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.buy {
+  background: #22c55e;
+  color: white;
+}
+
+.sell {
+  background: #ef4444;
+  color: white;
+}
+
+.carteira-item {
+  background: #020617;
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #1e293b;
+}
