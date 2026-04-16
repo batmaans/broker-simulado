@@ -1,99 +1,77 @@
 body {
-  margin: 0;
   font-family: 'Segoe UI', Arial;
-  background: #0f172a;
-  color: #e2e8f0;
+  background: #0e0e0e;
+  color: #eaeaea;
+  margin: 0;
+}
+
+#loginScreen {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loginBox {
+  background: #1c1c1c;
+  padding: 25px;
+  border-radius: 12px;
+  width: 260px;
+  text-align: center;
+}
+
+.loginBox input {
+  width: 90%;
+  margin: 8px 0;
+  padding: 10px;
+  border-radius: 6px;
+  border: none;
+  background: #2a2a2a;
+  color: white;
 }
 
 header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  padding: 20px;
-  background: #020617;
-  border-bottom: 1px solid #1e293b;
-}
-
-h1 {
-  color: #22c55e;
-}
-
-.saldo-box {
-  font-size: 18px;
-  background: #020617;
-  padding: 10px 20px;
-  border-radius: 10px;
-  border: 1px solid #1e293b;
+  background: #1a1a1a;
+  padding: 15px;
+  border-bottom: 1px solid #333;
 }
 
 main {
-  display: flex;
-  gap: 20px;
-  padding: 20px;
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  gap: 10px;
+  padding: 10px;
 }
 
 section {
-  flex: 1;
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 15px;
-}
-
-.card {
-  background: #020617;
+  background: #181818;
   padding: 15px;
-  border-radius: 12px;
-  border: 1px solid #1e293b;
-  transition: 0.2s;
+  border-radius: 10px;
 }
 
-.card:hover {
-  transform: scale(1.02);
-}
-
-.nome {
-  font-size: 18px;
-  font-weight: bold;
-}
-
-.preco {
-  margin: 10px 0;
-  font-size: 16px;
-}
-
-.variacao.up {
-  color: #22c55e;
-}
-
-.variacao.down {
-  color: #ef4444;
+#ativos div {
+  background: #222;
+  margin: 8px 0;
+  padding: 10px;
+  border-radius: 6px;
 }
 
 button {
-  margin-top: 5px;
   padding: 6px 10px;
   border: none;
   border-radius: 6px;
   cursor: pointer;
 }
 
-.buy {
-  background: #22c55e;
-  color: white;
-}
+.btn-buy { background: #00c853; color: white; }
+.btn-sell { background: #d50000; color: white; }
 
-.sell {
-  background: #ef4444;
-  color: white;
-}
+.positivo { color: #00e676; }
+.negativo { color: #ff5252; }
 
-.carteira-item {
-  background: #020617;
-  padding: 10px;
-  border-radius: 10px;
-  margin-bottom: 10px;
-  border: 1px solid #1e293b;
+canvas {
+  width: 100% !important;
+  height: 300px !important;
 }
