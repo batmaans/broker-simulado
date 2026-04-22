@@ -2,61 +2,98 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>Broker Pro+</title>
+  <title>Broker Pro+ | Dashboard</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
   <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+  <script src="script.js" defer></script>
 </head>
-
-<body>
-    
-  <header>
-    <h1>📊 Broker Pro+</h1>
-    <div>Usuário: <span id="userDisplay"></span></div>
-    <div>Saldo: R$ <span id="saldo"></span></div>
-    <div>Patrimônio: R$ <span id="patrimonio"></span></div>
-    <div>Rentabilidade: <span id="rentabilidade"></span></div>
-    <button onclick="logout()">Sair</button>
-
-  <div>
-    Mercado:
-  <select id="modoMercado">
-    <option value="bull">Alta 📈</option>
-    <option value="bear">Baixa 📉</option>
-    <option value="lateral" selected>Lateral ➡️</option>
-    <option value="aleatorio">Aleatório 🎲</option>
-  </select>
-  </div>
-
+<body class="dashboard-body">
+  
+  <header class="topbar">
+    <div class="brand-logo">▶ Broker Pro+</div>
+    <div class="user-controls">
+      <div class="market-selector">
+        <label for="modoMercado">Mercado:</label>
+        <select id="modoMercado">
+          <option value="bull">Alta 📈</option>
+          <option value="bear">Baixa 📉</option>
+          <option value="lateral" selected>Lateral ➡️</option>
+          <option value="aleatorio">Aleatório 🎲</option>
+          <option value="real">Mercado Real 🌍</option> </select>
+        </select>
+      </div>
+      <div class="user-badge">
+        👤 <span id="userDisplay"></span>
+      </div>
+      <button id="btn-logout" class="btn-outline">Sair</button>
+    </div>
   </header>
 
-<main>
+  <section class="kpi-banner">
+    <div class="kpi-card">
+      <span class="kpi-label">Saldo Disponível</span>
+      <span class="kpi-value" id="saldo">R$ 0,00</span>
+    </div>
+    <div class="kpi-card">
+      <span class="kpi-label">Patrimônio Total</span>
+      <span class="kpi-value" id="patrimonio">R$ 0,00</span>
+    </div>
+    <div class="kpi-card">
+      <span class="kpi-label">Rentabilidade</span>
+      <span class="kpi-value" id="rentabilidade">0.00%</span>
+    </div>
+  </section>
 
-<section>
-  <h2>📈 Mercado</h2>
-  <div id="ativos"></div>
-</section>
+  <main class="dashboard-grid">
+    
+    <section class="panel market-panel">
+      <div class="panel-header">
+        <h2>📈 Mercado em Tempo Real</h2>
+      </div>
+      <div id="ativos" class="ativos-list">
+        </div>
+    </section>
 
-<section>
-  <h2>💼 Carteira</h2>
-  <div id="carteira"></div>
-</section>
+    <div class="center-column">
+      <section class="panel chart-panel">
+        <div class="panel-header">
+          <h2>📊 Análise Gráfica</h2>
+          <span id="chart-title" class="text-muted">Selecione um ativo</span>
+        </div>
+        <div class="canvas-container">
+          <canvas id="grafico"></canvas>
+        </div>
+      </section>
 
-<section>
-  <h2>📊 Gráfico</h2>
-  <canvas id="grafico"></canvas>
-</section>
+      <section class="panel portfolio-panel">
+        <div class="panel-header">
+          <h2>💼 Minha Carteira</h2>
+        </div>
+        <div class="table-responsive">
+          <table class="portfolio-table">
+            <thead>
+              <tr>
+                <th>Ativo</th>
+                <th>Qtd</th>
+                <th>Valor Atual (Est.)</th>
+              </tr>
+            </thead>
+            <tbody id="carteira">
+              </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
 
-<section>
-  <h2>📜 Histórico</h2>
-  <div id="historico"></div>
-</section>
+    <section class="panel history-panel">
+      <div class="panel-header">
+        <h2>📜 Histórico de Ordens</h2>
+      </div>
+      <div id="historico" class="history-list">
+        </div>
+    </section>
 
-</main>
-
-</div>
-
-<script src="script.js"></script>
+  </main>
 </body>
 </html>

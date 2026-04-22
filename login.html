@@ -4,354 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Broker Pro+ | Acesso</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Sora:wght@300;400;600&display=swap" rel="stylesheet">
-  <style>
-    /* ─── RESET / BASE ─────────────────────────────────────── */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --bg:       #0e0e0e;
-      --surface:  #1a1a1a;
-      --card:     #1c1c1c;
-      --border:   #2a2a2a;
-      --accent:   #00c853;
-      --accent-d: #00963e;
-      --danger:   #d50000;
-      --text:     #eaeaea;
-      --muted:    #666;
-      --mono:     'Share Tech Mono', monospace;
-      --sans:     'Sora', sans-serif;
-    }
-
-    body {
-      font-family: var(--sans);
-      background: var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-    }
-
-    /* ─── LEFT PANEL ────────────────────────────────────────── */
-    .panel-left {
-      background: var(--surface);
-      border-right: 1px solid var(--border);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      padding: 48px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    /* Decorative grid lines */
-    .panel-left::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-image:
-        linear-gradient(var(--border) 1px, transparent 1px),
-        linear-gradient(90deg, var(--border) 1px, transparent 1px);
-      background-size: 40px 40px;
-      opacity: 0.4;
-    }
-
-    /* Glowing accent circle */
-    .panel-left::after {
-      content: '';
-      position: absolute;
-      bottom: -120px;
-      left: -80px;
-      width: 400px;
-      height: 400px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(0,200,83,0.12) 0%, transparent 70%);
-      pointer-events: none;
-    }
-
-    .brand {
-      position: relative;
-      z-index: 1;
-    }
-
-    .brand-logo {
-      font-family: var(--mono);
-      font-size: 13px;
-      color: var(--accent);
-      letter-spacing: 4px;
-      text-transform: uppercase;
-      margin-bottom: 16px;
-    }
-
-    .brand-title {
-      font-size: 42px;
-      font-weight: 600;
-      line-height: 1.15;
-      letter-spacing: -1px;
-    }
-
-    .brand-title span {
-      color: var(--accent);
-    }
-
-    .brand-sub {
-      margin-top: 16px;
-      font-size: 14px;
-      font-weight: 300;
-      color: var(--muted);
-      line-height: 1.7;
-      max-width: 320px;
-    }
-
-    /* Ticker tape */
-    .ticker-wrap {
-      position: relative;
-      z-index: 1;
-      overflow: hidden;
-    }
-
-    .ticker-label {
-      font-family: var(--mono);
-      font-size: 10px;
-      color: var(--muted);
-      letter-spacing: 2px;
-      margin-bottom: 10px;
-    }
-
-    .ticker-row {
-      display: flex;
-      gap: 20px;
-      animation: ticker-scroll 18s linear infinite;
-      white-space: nowrap;
-    }
-
-    @keyframes ticker-scroll {
-      0%   { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
-    }
-
-    .ticker-item {
-      font-family: var(--mono);
-      font-size: 13px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      flex-shrink: 0;
-    }
-
-    .ticker-name { color: var(--text); }
-    .ticker-up   { color: var(--accent); }
-    .ticker-dn   { color: var(--danger); }
-
-    /* ─── RIGHT PANEL ───────────────────────────────────────── */
-    .panel-right {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding: 48px 64px;
-    }
-
-    .form-container {
-      width: 100%;
-      max-width: 360px;
-    }
-
-    /* Tab switcher */
-    .tabs {
-      display: flex;
-      gap: 0;
-      margin-bottom: 32px;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .tab-btn {
-      flex: 1;
-      background: none;
-      border: none;
-      color: var(--muted);
-      font-family: var(--sans);
-      font-size: 14px;
-      font-weight: 400;
-      padding: 12px;
-      cursor: pointer;
-      position: relative;
-      transition: color 0.2s;
-    }
-
-    .tab-btn::after {
-      content: '';
-      position: absolute;
-      bottom: -1px;
-      left: 0;
-      right: 0;
-      height: 2px;
-      background: var(--accent);
-      transform: scaleX(0);
-      transition: transform 0.25s;
-    }
-
-    .tab-btn.active {
-      color: var(--text);
-      font-weight: 600;
-    }
-
-    .tab-btn.active::after {
-      transform: scaleX(1);
-    }
-
-    /* Forms */
-    .form-panel {
-      display: none;
-      flex-direction: column;
-      gap: 16px;
-      animation: fade-in 0.25s ease;
-    }
-
-    .form-panel.active {
-      display: flex;
-    }
-
-    @keyframes fade-in {
-      from { opacity: 0; transform: translateY(8px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    .form-title {
-      font-size: 22px;
-      font-weight: 600;
-      margin-bottom: 4px;
-    }
-
-    .form-subtitle {
-      font-size: 13px;
-      color: var(--muted);
-      margin-bottom: 8px;
-    }
-
-    .field-group {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-
-    .field-group label {
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-
-    .field-group input {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      color: var(--text);
-      font-family: var(--sans);
-      font-size: 14px;
-      padding: 12px 14px;
-      width: 100%;
-      transition: border-color 0.2s, box-shadow 0.2s;
-      outline: none;
-    }
-
-    .field-group input:focus {
-      border-color: var(--accent);
-      box-shadow: 0 0 0 3px rgba(0,200,83,0.12);
-    }
-
-    .btn-primary {
-      background: var(--accent);
-      color: #000;
-      font-family: var(--sans);
-      font-size: 14px;
-      font-weight: 600;
-      border: none;
-      border-radius: 8px;
-      padding: 13px;
-      cursor: pointer;
-      width: 100%;
-      transition: background 0.2s, transform 0.1s;
-      margin-top: 4px;
-    }
-
-    .btn-primary:hover  { background: var(--accent-d); }
-    .btn-primary:active { transform: scale(0.98); }
-
-    /* Message */
-    .msg {
-      font-size: 13px;
-      min-height: 18px;
-      text-align: center;
-      border-radius: 6px;
-      padding: 6px 0;
-      opacity: 0;
-      transition: opacity 0.3s;
-    }
-
-    .msg.visible { opacity: 1; }
-    .msg.ok      { color: var(--accent); }
-    .msg.err     { color: var(--danger); }
-
-    /* Footer link */
-    .alt-link {
-      text-align: center;
-      font-size: 12px;
-      color: var(--muted);
-      margin-top: 8px;
-    }
-
-    .alt-link button {
-      background: none;
-      border: none;
-      color: var(--accent);
-      font-family: var(--sans);
-      font-size: 12px;
-      cursor: pointer;
-      text-decoration: underline;
-    }
-
-    /* Bottom credit */
-    .credit {
-      margin-top: 40px;
-      font-family: var(--mono);
-      font-size: 11px;
-      color: var(--muted);
-      text-align: center;
-    }
-
-    /* ─── RESPONSIVE ────────────────────────────────────────── */
-    @media (max-width: 720px) {
-      body { grid-template-columns: 1fr; }
-      .panel-left { display: none; }
-      .panel-right { padding: 40px 24px; }
-    }
-  </style>
-    <script>
-  const form = document.querySelector(".formpadrao");
-
-  form.addEventListener("submit", function(e) {
-    e.preventDefault();
-
-    const user = document.getElementById("username").value;
-    const pass = document.getElementById("password").value;
-
-    // validação simples
-    if (user === "admin" && pass === "123") {
-      window.location.href = "index.html";
-    } else {
-      alert("Login inválido");
-    }
-  });
-    </script>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
 </head>
-<body>
-
-  <!-- ═══ LEFT PANEL ═══════════════════════════════════════════ -->
+<body class="login-body">
   <div class="panel-left">
-
     <div class="brand">
       <p class="brand-logo">▶ Broker Pro+</p>
       <h1 class="brand-title">Simule.<br>Invista.<br><span>Aprenda.</span></h1>
@@ -360,10 +17,8 @@
         Sem risco. Com toda a emoção.
       </p>
     </div>
-
     <div class="ticker-wrap">
       <p class="ticker-label">MERCADO SIMULADO</p>
-      <!-- duplicated for infinite scroll -->
       <div class="ticker-row" id="tickerRow">
         <span class="ticker-item"><span class="ticker-name">PETR4</span><span class="ticker-up">▲ R$30,00</span></span>
         <span class="ticker-item"><span class="ticker-name">VALE3</span><span class="ticker-dn">▼ R$60,00</span></span>
@@ -372,7 +27,6 @@
         <span class="ticker-item"><span class="ticker-name">ABEV3</span><span class="ticker-up">▲ R$13,00</span></span>
         <span class="ticker-item"><span class="ticker-name">WEGE3</span><span class="ticker-up">▲ R$40,00</span></span>
         <span class="ticker-item"><span class="ticker-name">MGLU3</span><span class="ticker-dn">▼ R$ 5,00</span></span>
-        <!-- duplicate for seamless loop -->
         <span class="ticker-item"><span class="ticker-name">PETR4</span><span class="ticker-up">▲ R$30,00</span></span>
         <span class="ticker-item"><span class="ticker-name">VALE3</span><span class="ticker-dn">▼ R$60,00</span></span>
         <span class="ticker-item"><span class="ticker-name">ITUB4</span><span class="ticker-up">▲ R$28,00</span></span>
@@ -382,170 +36,51 @@
         <span class="ticker-item"><span class="ticker-name">MGLU3</span><span class="ticker-dn">▼ R$ 5,00</span></span>
       </div>
     </div>
-
   </div>
-
-  <!-- ═══ RIGHT PANEL ══════════════════════════════════════════ -->
   <div class="panel-right">
     <div class="form-container">
-
-      <!-- Tabs -->
       <div class="tabs">
-        <button class="tab-btn active" onclick="switchTab('login')">Entrar</button>
-        <button class="tab-btn" onclick="switchTab('register')">Cadastrar</button>
+        <button class="tab-btn active" data-target="login">Entrar</button>
+        <button class="tab-btn" data-target="register">Cadastrar</button>
       </div>
-
-      <!-- LOGIN FORM -->
       <div class="form-panel active" id="panel-login">
         <p class="form-title">Bem-vindo de volta</p>
         <p class="form-subtitle">Acesse sua conta para continuar.</p>
-
         <div class="field-group">
           <label for="login-user">Usuário</label>
           <input type="text" id="login-user" placeholder="Seu nome de usuário" autocomplete="username">
         </div>
-
         <div class="field-group">
           <label for="login-pass">Senha</label>
-          <input type="password" id="login-pass" placeholder="Sua senha" autocomplete="current-password"
-                 onkeydown="if(event.key==='Enter') doLogin()">
+          <input type="password" id="login-pass" placeholder="Sua senha" autocomplete="current-password">
         </div>
-
         <p class="msg" id="msg-login"></p>
-
-        <button class="btn-primary" onclick="doLogin()">Entrar na plataforma</button>
-
+        <button id="btn-do-login" class="btn-primary">Entrar na plataforma</button>
         <p class="alt-link">
           Não tem conta?
-          <button onclick="switchTab('register')">Cadastre-se grátis</button>
+          <button id="link-to-register">Cadastre-se grátis</button>
         </p>
       </div>
-
-      <!-- REGISTER FORM -->
       <div class="form-panel" id="panel-register">
         <p class="form-title">Criar conta</p>
         <p class="form-subtitle">Você começa com R$ 10.000,00 de saldo virtual.</p>
-
         <div class="field-group">
           <label for="reg-user">Usuário</label>
           <input type="text" id="reg-user" placeholder="Escolha um nome de usuário" autocomplete="username">
         </div>
-
         <div class="field-group">
           <label for="reg-pass">Senha</label>
-          <input type="password" id="reg-pass" placeholder="Mínimo 6 caracteres para a senha" autocomplete="new-password"
-                 onkeydown="if(event.key==='Enter') doRegister()">
+          <input type="password" id="reg-pass" placeholder="Mínimo 6 caracteres" autocomplete="new-password">
         </div>
-
         <p class="msg" id="msg-register"></p>
-
-        <button class="btn-primary" onclick="doRegister()">Criar minha conta</button>
-
+        <button id="btn-do-register" class="btn-primary">Criar minha conta</button>
         <p class="alt-link">
           Já tem conta?
-          <button onclick="switchTab('login')">Fazer login</button>
+          <button id="link-to-login">Fazer login</button>
         </p>
       </div>
-
       <p class="credit">© 2026 Broker Pro+ · Simulador educacional</p>
     </div>
   </div>
-
-  <script>
-    // ── Tab switcher ────────────────────────────────────────────
-    function switchTab(tab) {
-      document.querySelectorAll('.tab-btn').forEach((b, i) =>
-        b.classList.toggle('active', (tab === 'login' ? i === 0 : i === 1))
-      );
-      document.getElementById('panel-login').classList.toggle('active', tab === 'login');
-      document.getElementById('panel-register').classList.toggle('active', tab === 'register');
-      clearMsgs();
-    }
-
-    function clearMsgs() {
-      ['msg-login', 'msg-register'].forEach(id => {
-        const el = document.getElementById(id);
-        el.textContent = '';
-        el.className = 'msg';
-      });
-    }
-
-    function showMsg(id, text, type) {
-      const el = document.getElementById(id);
-      el.textContent = text;
-      el.className = `msg visible ${type}`;
-    }
-
-    // ── Auth helpers (mesmo formato do script.js) ───────────────
-    function getUsers() {
-      return JSON.parse(localStorage.getItem('users')) || {};
-    }
-
-    function saveUsers(users) {
-      localStorage.setItem('users', JSON.stringify(users));
-    }
-
-    // ── LOGIN ───────────────────────────────────────────────────
-    function doLogin() {
-      const u = document.getElementById('login-user').value.trim();
-      const p = document.getElementById('login-pass').value;
-
-      if (!u || !p) {
-        showMsg('msg-login', 'Preencha usuário e senha.', 'err');
-        return;
-      }
-
-      const users = getUsers();
-
-      if (users[u] && users[u].senha === p) {
-        // Armazena sessão e redireciona
-        sessionStorage.setItem('currentUser', u);
-        window.location.href = 'index.html';
-      } else {
-        showMsg('msg-login', 'Usuário ou senha incorretos.', 'err');
-      }
-    }
-
-    // ── REGISTER ────────────────────────────────────────────────
-    function doRegister() {
-      const u = document.getElementById('reg-user').value.trim();
-      const p = document.getElementById('reg-pass').value;
-
-      if (!u || !p) {
-        showMsg('msg-register', 'Preencha todos os campos.', 'err');
-        return;
-      }
-
-      if (p.length < 6) {
-        showMsg('msg-register', 'A senha precisa ter ao menos 6 caracteres.', 'err');
-        return;
-      }
-
-      const users = getUsers();
-
-      if (users[u]) {
-        showMsg('msg-register', 'Esse usuário já existe.', 'err');
-        return;
-      }
-
-      users[u] = {
-        senha: p,
-        saldo: 10000,
-        saldoInicial: 10000,
-        carteira: {},
-        historico: []
-      };
-
-      saveUsers(users);
-      showMsg('msg-register', '✔ Conta criada! Faça seu login.', 'ok');
-
-      // Preenche o login automaticamente e troca de aba após 1s
-      setTimeout(() => {
-        document.getElementById('login-user').value = u;
-        document.getElementById('login-pass').value = '';
-        switchTab('login');
-      }, 1200);
-    }
-  </script>
 </body>
 </html>
