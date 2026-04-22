@@ -13,64 +13,6 @@ let ativos = [
   { nome: "MGLU3", preco: 5, icon: "🛍️", historico: [] }
 ];
 
-// LOGIN
-
-function register() {
-  let u = username.value;
-  let p = password.value;
-
-  if (!u || !p) return;
-
-  if (users[u]) {
-    loginMsg.innerText = "Usuário já existe!";
-    return;
-  }
-
-  users[u] = {
-    senha: p,
-    saldo: 10000,
-    saldoInicial: 10000,
-    carteira: {},
-    historico: []
-  };
-
-  saveUsers();
-  loginMsg.innerText = "Usuário criado!";
-}
-
-function login() {
-  let u = username.value;
-  let p = password.value;
-
-  if (users[u] && users[u].senha === p) {
-    currentUser = u;
-
-    loginScreen.style.display = "none";
-    app.style.display = "block";
-
-    userDisplay.innerText = u;
-
-    atualizarTudo();
-    renderAtivos();
-  } else {
-    loginMsg.innerText = "Login inválido!";
-  }
-}
-
-function logout() {
-  currentUser = null;
-  loginScreen.style.display = "flex";
-  app.style.display = "none";
-}
-
-function getUser() {
-  return users[currentUser];
-}
-
-function saveUsers() {
-  localStorage.setItem("users", JSON.stringify(users));
-}
-
 // SALDO
 
 function atualizarSaldo() {
@@ -271,3 +213,10 @@ setInterval(() => {
   calcularPatrimonio();
   atualizarIndicadorMercado();
 }, 2000);
+
+function atualizarSaldo() {
+  const el = document.getElementById("saldo");
+  if (el) {
+    el.innerText = saldo.toFixed(2);
+  }
+}

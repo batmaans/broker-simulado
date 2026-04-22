@@ -11,43 +11,25 @@
 
 <body>
     
-<div id="modoAtual"></div>
+  <header>
+    <h1>📊 Broker Pro+</h1>
+    <div>Usuário: <span id="userDisplay"></span></div>
+    <div>Saldo: R$ <span id="saldo"></span></div>
+    <div>Patrimônio: R$ <span id="patrimonio"></span></div>
+    <div>Rentabilidade: <span id="rentabilidade"></span></div>
+    <button onclick="logout()">Sair</button>
 
-<div id="loginScreen">
-  <div class="loginBox">
-    <h2>Broker Pro+</h2>
-
-    <input type="text" id="username" placeholder="Usuário">
-    <input type="password" id="password" placeholder="Senha">
-
-    <button onclick="login()">Entrar</button>
-    <button onclick="register()">Cadastrar</button>
-
-    <p id="loginMsg"></p>
+  <div>
+    Mercado:
+  <select id="modoMercado">
+    <option value="bull">Alta 📈</option>
+    <option value="bear">Baixa 📉</option>
+    <option value="lateral" selected>Lateral ➡️</option>
+    <option value="aleatorio">Aleatório 🎲</option>
+  </select>
   </div>
-</div>
 
-<div id="app" style="display:none;">
-
-<header>
-  <h1>📊 Broker Pro+</h1>
-  <div>Usuário: <span id="userDisplay"></span></div>
-  <div>Saldo: R$ <span id="saldo"></span></div>
-  <div>Patrimônio: R$ <span id="patrimonio"></span></div>
-  <div>Rentabilidade: <span id="rentabilidade"></span></div>
-  <button onclick="logout()">Sair</button>
-
-<div>
-  Mercado:
-<select id="modoMercado">
-  <option value="bull">Alta 📈</option>
-  <option value="bear">Baixa 📉</option>
-  <option value="lateral" selected>Lateral ➡️</option>
-  <option value="aleatorio">Aleatório 🎲</option>
-</select>
-</div>
-
-</header>
+  </header>
 
 <main>
 
