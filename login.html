@@ -2,29 +2,85 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>Broker Pro</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Broker Pro+ | Acesso</title>
   <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
 </head>
-<body>
-
-  <header class="login-centra">
-    <h1>📊 Broker Pro - Login</h1>
-  </header>
-
-  <section class="login-form">
-    <h2>Bem vindo, investidor, faça seu login</h2>
-      <form class = formpadrao>
-        <input class="input-login" type="text" id="username" placeholder="Usuário" required>
-        <input class="input-login" type="password" id="password" placeholder="Senha" required>
-        <button class="button-login" type="submit">Entrar</button>
-      </form>
-  </section>
-
-
-  <script src="script.js"></script>
-
-  <footer>
-    <p>&copy; 2026 Broker Pro. Todos os direitos reservados.</p>
-  </footer>
+<body class="login-body">
+  <div class="panel-left">
+    <div class="brand">
+      <p class="brand-logo">▶ Broker Pro+</p>
+      <h1 class="brand-title">Simule.<br>Invista.<br><span>Aprenda.</span></h1>
+      <p class="brand-sub">
+        Treine sua estratégia com ativos do mercado brasileiro em tempo real simulado.
+        Sem risco. Com toda a emoção.
+      </p>
+    </div>
+    <div class="ticker-wrap">
+      <p class="ticker-label">MERCADO SIMULADO</p>
+      <div class="ticker-row" id="tickerRow">
+        <span class="ticker-item"><span class="ticker-name">PETR4</span><span class="ticker-up">▲ R$30,00</span></span>
+        <span class="ticker-item"><span class="ticker-name">VALE3</span><span class="ticker-dn">▼ R$60,00</span></span>
+        <span class="ticker-item"><span class="ticker-name">ITUB4</span><span class="ticker-up">▲ R$28,00</span></span>
+        <span class="ticker-item"><span class="ticker-name">BBDC4</span><span class="ticker-dn">▼ R$15,00</span></span>
+        <span class="ticker-item"><span class="ticker-name">ABEV3</span><span class="ticker-up">▲ R$13,00</span></span>
+        <span class="ticker-item"><span class="ticker-name">WEGE3</span><span class="ticker-up">▲ R$40,00</span></span>
+        <span class="ticker-item"><span class="ticker-name">MGLU3</span><span class="ticker-dn">▼ R$ 5,00</span></span>
+        <span class="ticker-item"><span class="ticker-name">PETR4</span><span class="ticker-up">▲ R$30,00</span></span>
+        <span class="ticker-item"><span class="ticker-name">VALE3</span><span class="ticker-dn">▼ R$60,00</span></span>
+        <span class="ticker-item"><span class="ticker-name">ITUB4</span><span class="ticker-up">▲ R$28,00</span></span>
+        <span class="ticker-item"><span class="ticker-name">BBDC4</span><span class="ticker-dn">▼ R$15,00</span></span>
+        <span class="ticker-item"><span class="ticker-name">ABEV3</span><span class="ticker-up">▲ R$13,00</span></span>
+        <span class="ticker-item"><span class="ticker-name">WEGE3</span><span class="ticker-up">▲ R$40,00</span></span>
+        <span class="ticker-item"><span class="ticker-name">MGLU3</span><span class="ticker-dn">▼ R$ 5,00</span></span>
+      </div>
+    </div>
+  </div>
+  <div class="panel-right">
+    <div class="form-container">
+      <div class="tabs">
+        <button class="tab-btn active" data-target="login">Entrar</button>
+        <button class="tab-btn" data-target="register">Cadastrar</button>
+      </div>
+      <div class="form-panel active" id="panel-login">
+        <p class="form-title">Bem-vindo de volta</p>
+        <p class="form-subtitle">Acesse sua conta para continuar.</p>
+        <div class="field-group">
+          <label for="login-user">Usuário</label>
+          <input type="text" id="login-user" placeholder="Seu nome de usuário" autocomplete="username">
+        </div>
+        <div class="field-group">
+          <label for="login-pass">Senha</label>
+          <input type="password" id="login-pass" placeholder="Sua senha" autocomplete="current-password">
+        </div>
+        <p class="msg" id="msg-login"></p>
+        <button id="btn-do-login" class="btn-primary">Entrar na plataforma</button>
+        <p class="alt-link">
+          Não tem conta?
+          <button id="link-to-register">Cadastre-se grátis</button>
+        </p>
+      </div>
+      <div class="form-panel" id="panel-register">
+        <p class="form-title">Criar conta</p>
+        <p class="form-subtitle">Você começa com R$ 10.000,00 de saldo virtual.</p>
+        <div class="field-group">
+          <label for="reg-user">Usuário</label>
+          <input type="text" id="reg-user" placeholder="Escolha um nome de usuário" autocomplete="username">
+        </div>
+        <div class="field-group">
+          <label for="reg-pass">Senha</label>
+          <input type="password" id="reg-pass" placeholder="Mínimo 6 caracteres" autocomplete="new-password">
+        </div>
+        <p class="msg" id="msg-register"></p>
+        <button id="btn-do-register" class="btn-primary">Criar minha conta</button>
+        <p class="alt-link">
+          Já tem conta?
+          <button id="link-to-login">Fazer login</button>
+        </p>
+      </div>
+      <p class="credit">© 2026 Broker Pro+ · Simulador educacional</p>
+    </div>
+  </div>
 </body>
 </html>
