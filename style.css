@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Sora:wght@300;400;600&display=swap');
 
-/* ─── RESET E VARIÁVEIS ───────────────────────────────── */
+/* RESET E VARIÁVEIS */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
@@ -20,7 +20,7 @@
   --sans:         'Sora', sans-serif;
 }
 
-/* ─── DASHBOARD ───────────────────────────────────────── */
+/* DASHBOARD */
 .dashboard-body {
   font-family: var(--sans);
   background: var(--bg);
@@ -64,7 +64,7 @@ button { font-family: var(--sans); cursor: pointer; transition: all 0.2s; }
   border-radius: 4px; font-family: var(--sans); outline: none;
 }
 
-/* Badge de usuário — agora é um link clicável */
+/* Badge de usuário */
 .user-badge {
   font-weight: 600;
   color: var(--accent);
@@ -183,7 +183,7 @@ button { font-family: var(--sans); cursor: pointer; transition: all 0.2s; }
   .user-controls { width: 100%; justify-content: space-between; flex-wrap: wrap; }
 }
 
-/* ─── LOGIN ───────────────────────────────────────────── */
+/* LOGIN */
 .login-body {
   font-family: var(--sans);
   background: var(--bg);
@@ -325,7 +325,7 @@ button { font-family: var(--sans); cursor: pointer; transition: all 0.2s; }
   cursor: pointer; text-decoration: underline;
 }
 
-/* Link "esqueci minha senha" — menor e mais discreto */
+/* Link "esqueci minha senha" */
 .forgot-link {
   color: var(--text-muted) !important;
   font-size: 12px !important;
@@ -365,7 +365,7 @@ button { font-family: var(--sans); cursor: pointer; transition: all 0.2s; }
   .login-body .panel-right { padding: 40px 24px; }
 }
 
- /* ── PROFILE PAGE STYLES ─────────────────── */
+ /* PROFILE */
 .profile-body {
   font-family: var(--sans);
   background: var(--bg);
@@ -565,7 +565,6 @@ button { font-family: var(--sans); cursor: pointer; transition: all 0.2s; }
 .btn-row { display: flex; gap: 8px; }
 .btn-row > * { flex: 1; }
 
-/* TOAST / FEEDBACK */
 .p-msg {
   font-size: 12px; text-align: center;
   border-radius: 6px; padding: 8px 12px;
@@ -578,13 +577,11 @@ button { font-family: var(--sans); cursor: pointer; transition: all 0.2s; }
 .p-msg.err { background: rgba(213,0,0,0.1); color: var(--danger); border: 1px solid rgba(213,0,0,0.2); }
 .p-msg.warn { background: rgba(255,200,0,0.1); color: #ffc800; border: 1px solid rgba(255,200,0,0.2); }
 
-/* DIVIDER */
 .p-divider {
   border: none; border-top: 1px solid var(--border);
   margin: 4px 0;
 }
 
-/* STATS CARD */
 .stats-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
