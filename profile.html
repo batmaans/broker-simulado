@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Broker Pro+ | Perfil</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body class="profile-body">
+
+  <!-- TOPBAR -->
+  <header class="topbar">
+    <div class="topbar-left">
+      <div class="brand-logo">▶ Broker Pro+</div>
+      <nav class="breadcrumb">
+        <a href="index.html">Dashboard</a>
+        <span>/ Perfil</span>
+      </nav>
+    </div>
+    <div class="user-controls">
+      <div class="user-badge">👤 <span id="userDisplay"></span></div>
+      <button class="btn-outline" onclick="window.location.href='index.html'">← Voltar</button>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <div class="profile-hero">
+    <div class="avatar-ring" id="avatarEmoji">👤</div>
+    <div class="profile-info">
+      <div class="profile-username">Olá, <span id="heroUsername">—</span></div>
+      <div class="profile-meta">
+        <span class="profile-meta-item">🏦 Saldo: <strong id="heroSaldo" style="color:var(--accent)">—</strong></span>
+        <span class="profile-meta-item">📊 Operações: <strong id="heroOps">—</strong></span>
+        <span class="profile-meta-item">💼 Ativos na carteira: <strong id="heroAtivos">—</strong></span>
+      </div>
+    </div>
+    <div class="profile-stat-pills">
+      <div class="stat-pill">
+        <div class="stat-pill-label">Patrimônio</div>
+        <div class="stat-pill-value" id="heroPatrimonio">—</div>
+      </div>
+      <div class="stat-pill">
+        <div class="stat-pill-label">Rentabilidade</div>
+        <div class="stat-pill-value" id="heroRentabilidade">—</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GRID PRINCIPAL -->
+  <main class="profile-grid">
+
+    <!-- COLUNA ESQUERDA -->
+    <div class="profile-section">
+
+      <!-- SALDO -->
+      <div class="p-card">
+        <div class="p-card-header">
+          <span class="card-icon">💰</span>
+          <h3>Gerenciar Saldo</h3>
+        </div>
+        <div class="p-card-body">
+          <div class="p-field">
+            <label>Valor (R$)</label>
+            <input type="number" id="valorSaldo" placeholder="0,00" min="1" step="100">
+            <span class="p-field-hint">Use os botões abaixo para adicionar ou remover.</span>
+          </div>
+          <div class="btn-row">
+            <button class="btn-accent" onclick="alterarSaldo('add')">＋ Adicionar</button>
+            <button class="btn-danger" onclick="alterarSaldo('remove')">－ Remover</button>
+          </div>
+          <hr class="p-divider">
+          <button class="btn-neutral btn-full" onclick="abrirModal('reset')">🔄 Resetar para R$ 10.000,00</button>
+          <div class="p-msg" id="msg-saldo"></div>
+        </div>
+      </div>
+
+      <!-- ALTERAR SENHA -->
+      <div class="p-card">
+        <div class="p-card-header">
+          <span class="card-icon">🔐</span>
+          <h3>Alterar Senha</h3>
+        </div>
+        <div class="p-card-body">
+          <div class="p-field">
+            <label>Senha Atual</label>
+            <input type="password" id="senhaAtual" placeholder="••••••">
+          </div>
+          <div class="p-field">
+            <label>Nova Senha</label>
+            <input type="password" id="senhaNova" placeholder="Mínimo 6 caracteres">
+          </div>
+          <div class="p-field">
+            <label>Confirmar Nova Senha</label>
+            <input type="password" id="senhaConfirm" placeholder="Repita a nova senha">
+          </div>
+          <button class="btn-accent btn-full" onclick="alterarSenha()">Salvar Nova Senha</button>
+          <div class="p-msg" id="msg-senha"></div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- COLUNA DIREITA -->
+    <div class="profile-section">
+
+      <!-- ESTATÍSTICAS -->
+      <div class="p-card">
+        <div class="p-card-header">
+          <span class="card-icon">📊</span>
+          <h3>Estatísticas da Conta</h3>
+        </div>
+        <div class="p-card-body">
+          <div class="stats-grid">
+            <div class="stat-block">
+              <div class="stat-block-label">Total Compras</div>
+              <div class="stat-block-value text-success" id="statCompras">—</div>
+            </div>
+            <div class="stat-block">
+              <div class="stat-block-label">Total Vendas</div>
+              <div class="stat-block-value text-danger" id="statVendas">—</div>
+            </div>
+            <div class="stat-block">
+              <div class="stat-block-label">Saldo Inicial</div>
+              <div class="stat-block-value" id="statInicial">—</div>
+            </div>
+            <div class="stat-block">
+              <div class="stat-block-label">Lucro / Prejuízo</div>
+              <div class="stat-block-value" id="statLucro">—</div>
+            </div>
+          </div>
+          <hr class="p-divider" style="margin:8px 0;">
+          <div class="progress-wrap">
+            <div class="progress-label">
+              <span>Progresso do Patrimônio</span>
+              <span id="progressLabel">0%</span>
+            </div>
+            <div class="progress-bar-bg">
+              <div class="progress-bar-fill" id="progressFill" style="width:0%"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CONFIGURAÇÕES -->
+      <div class="p-card">
+        <div class="p-card-header">
+          <span class="card-icon">⚙️</span>
+          <h3>Configurações da Conta</h3>
+        </div>
+        <div class="p-card-body">
+          <div class="p-field">
+            <label>Avatar</label>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;" id="emojiPicker"></div>
+            <span class="p-field-hint">Clique para alterar seu avatar.</span>
+          </div>
+          <hr class="p-divider">
+          <button class="btn-neutral btn-full" onclick="abrirModal('clearHistory')">
+            🗑️ Limpar Histórico de Ordens
+          </button>
+          <div class="p-msg" id="msg-config"></div>
+        </div>
+      </div>
+
+      <!-- ZONA DE PERIGO -->
+      <div class="p-card danger-zone">
+        <div class="p-card-header">
+          <span class="card-icon">⚠️</span>
+          <h3>Zona de Perigo</h3>
+        </div>
+        <div class="p-card-body">
+          <p style="font-size:13px;color:var(--text-muted);line-height:1.6;">
+            Ações irreversíveis que afetam sua conta permanentemente. Prossiga com cautela.
+          </p>
+          <button class="btn-danger btn-full" onclick="abrirModal('resetFull')">
+            💣 Resetar Conta Completa
+          </button>
+          <button class="btn-danger btn-full" onclick="abrirModal('deleteAccount')" style="margin-top:0;">
+            🗑️ Excluir Conta
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- MODAL DE CONFIRMAÇÃO -->
+  <div class="modal-overlay" id="confirmModal">
+    <div class="modal-box">
+      <div class="modal-title" id="modalTitle">Confirmar ação</div>
+      <div class="modal-subtitle" id="modalSubtitle">Tem certeza?</div>
+      <div class="modal-actions">
+        <button class="btn-neutral" onclick="fecharModal()">Cancelar</button>
+        <button class="btn-danger" id="modalConfirmBtn">Confirmar</button>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

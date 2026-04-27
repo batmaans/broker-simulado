@@ -9,7 +9,7 @@
   <script src="script.js" defer></script>
 </head>
 <body class="dashboard-body">
-  
+
   <header class="topbar">
     <div class="brand-logo">▶ Broker Pro+</div>
     <div class="user-controls">
@@ -19,13 +19,18 @@
           <option value="bull">Alta 📈</option>
           <option value="bear">Baixa 📉</option>
           <option value="lateral" selected>Lateral ➡️</option>
-          <option value="aleatorio">Aleatório 🎲</option>
+          <option value="aleatorio">Aleatório 🎲</option>        
           <option value="real">Mercado Real 🌍</option> </select>
+
         </select>
       </div>
-      <div class="user-badge">
-        👤 <span id="userDisplay"></span>
-      </div>
+
+      <!-- clicável que leva ao perfil -->
+      <a href="profile.html" class="user-badge" title="Ver perfil">
+        <span id="userAvatar">👤</span>
+        <span id="userDisplay"></span>
+      </a>
+
       <button id="btn-logout" class="btn-outline">Sair</button>
     </div>
   </header>
@@ -46,13 +51,12 @@
   </section>
 
   <main class="dashboard-grid">
-    
+
     <section class="panel market-panel">
       <div class="panel-header">
         <h2>📈 Mercado em Tempo Real</h2>
       </div>
-      <div id="ativos" class="ativos-list">
-        </div>
+      <div id="ativos" class="ativos-list"></div>
     </section>
 
     <div class="center-column">
@@ -79,8 +83,7 @@
                 <th>Valor Atual (Est.)</th>
               </tr>
             </thead>
-            <tbody id="carteira">
-              </tbody>
+            <tbody id="carteira"></tbody>
           </table>
         </div>
       </section>
@@ -90,8 +93,7 @@
       <div class="panel-header">
         <h2>📜 Histórico de Ordens</h2>
       </div>
-      <div id="historico" class="history-list">
-        </div>
+      <div id="historico" class="history-list"></div>
     </section>
 
   </main>

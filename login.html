@@ -37,12 +37,17 @@
       </div>
     </div>
   </div>
+
   <div class="panel-right">
     <div class="form-container">
-      <div class="tabs">
+
+      <!-- Login / Cadastrar -->
+      <div class="tabs" id="mainTabs">
         <button class="tab-btn active" data-target="login">Entrar</button>
         <button class="tab-btn" data-target="register">Cadastrar</button>
       </div>
+
+      <!-- PAINEL: Login -->
       <div class="form-panel active" id="panel-login">
         <p class="form-title">Bem-vindo de volta</p>
         <p class="form-subtitle">Acesse sua conta para continuar.</p>
@@ -60,7 +65,12 @@
           Não tem conta?
           <button id="link-to-register">Cadastre-se grátis</button>
         </p>
+        <p class="alt-link">
+          <button id="link-to-forgot" class="forgot-link">Esqueci minha senha</button>
+        </p>
       </div>
+
+      <!-- PAINEL: Cadastro -->
       <div class="form-panel" id="panel-register">
         <p class="form-title">Criar conta</p>
         <p class="form-subtitle">Você começa com R$ 10.000,00 de saldo virtual.</p>
@@ -72,6 +82,21 @@
           <label for="reg-pass">Senha</label>
           <input type="password" id="reg-pass" placeholder="Mínimo 6 caracteres" autocomplete="new-password">
         </div>
+        <div class="field-group">
+          <label for="reg-question">Pergunta de segurança</label>
+          <select id="reg-question" class="field-select">
+            <option value="">Escolha uma pergunta…</option>
+            <option value="Qual o nome do seu primeiro animal de estimação?">Qual o nome do seu primeiro animal de estimação?</option>
+            <option value="Qual a cidade onde você nasceu?">Qual a cidade onde você nasceu?</option>
+            <option value="Qual o nome da sua mãe?">Qual o nome da sua mãe?</option>
+            <option value="Qual foi sua primeira escola?">Qual foi sua primeira escola?</option>
+            <option value="Qual o modelo do seu primeiro carro?">Qual o modelo do seu primeiro carro?</option>
+          </select>
+        </div>
+        <div class="field-group">
+          <label for="reg-answer">Resposta</label>
+          <input type="text" id="reg-answer" placeholder="Sua resposta (guarde bem)" autocomplete="off">
+        </div>
         <p class="msg" id="msg-register"></p>
         <button id="btn-do-register" class="btn-primary">Criar minha conta</button>
         <p class="alt-link">
@@ -79,6 +104,46 @@
           <button id="link-to-login">Fazer login</button>
         </p>
       </div>
+
+      <!-- PAINEL: Esqueci minha senha (passo 1 - verificar usuário + resposta) -->
+      <div class="form-panel" id="panel-forgot">
+        <button class="back-btn" id="link-back-to-login">← Voltar ao login</button>
+        <p class="form-title">Recuperar senha</p>
+        <p class="form-subtitle">Informe seu usuário e responda à pergunta de segurança para redefinir sua senha.</p>
+
+        <!-- passo 1 -->
+        <div id="forgot-step1">
+          <div class="field-group">
+            <label for="forgot-user">Usuário</label>
+            <input type="text" id="forgot-user" placeholder="Seu nome de usuário" autocomplete="username">
+          </div>
+          <p class="msg" id="msg-forgot-step1"></p>
+          <button id="btn-forgot-step1" class="btn-primary">Continuar</button>
+        </div>
+
+        <!-- passo 2 (oculto até verificar usuário) -->
+        <div id="forgot-step2" style="display:none; flex-direction:column; gap:14px;">
+          <div class="security-question-box">
+            <p class="sq-label">Pergunta de segurança</p>
+            <p class="sq-text" id="forgot-question-text">—</p>
+          </div>
+          <div class="field-group">
+            <label for="forgot-answer">Sua resposta</label>
+            <input type="text" id="forgot-answer" placeholder="Responda aqui" autocomplete="off">
+          </div>
+          <div class="field-group">
+            <label for="forgot-newpass">Nova senha</label>
+            <input type="password" id="forgot-newpass" placeholder="Mínimo 6 caracteres" autocomplete="new-password">
+          </div>
+          <div class="field-group">
+            <label for="forgot-confirm">Confirmar nova senha</label>
+            <input type="password" id="forgot-confirm" placeholder="Repita a nova senha" autocomplete="new-password">
+          </div>
+          <p class="msg" id="msg-forgot-step2"></p>
+          <button id="btn-forgot-step2" class="btn-primary">Redefinir senha</button>
+        </div>
+      </div>
+
       <p class="credit">© 2026 Broker Pro+ · Simulador educacional</p>
     </div>
   </div>
