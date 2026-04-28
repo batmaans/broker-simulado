@@ -8,8 +8,8 @@ const formatMoney = (value) =>
     new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
 
 // ─── TOKEN DA API DE MERCADO REAL ─────────────────────────
-// Obtenha gratuitamente em: https://brapi.dev → "Começar grátis"
-const BRAPI_TOKEN = 'qGDLJb954uzwMSF7qnzYt2';
+// Obtido gratuitamente em: https://brapi.dev
+const BRAPI_TOKEN = qGDLJb954uzwMSF7qnzYt2;
 
 let ativosIniciais = [
   { nome: "PETR4", preco: 30, icon: "🛢️", historico: [] },
