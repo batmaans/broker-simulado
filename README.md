@@ -99,12 +99,12 @@ xdg-open login.html
 <table>
   <tr>
     <td align="center">
-      <b>João Pedro Martins de Souza</b><br>
-      <a href="https://github.com/JPMSz">@JPMSz</a>
-    </td>
-    <td align="center">
       <b>Gustavo Roberto Silva Pereira</b><br>
       <a href="https://github.com/batmaans">@batmaans</a>
+    </td>
+    <td align="center">
+      <b>João Pedro Martins de Souza</b><br>
+      <a href="https://github.com/JPMSz">@JPMSz</a>
     </td>
   </tr>
 </table>
