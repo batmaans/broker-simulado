@@ -230,6 +230,10 @@ function forgotStep2() {
 // ==========================================
 // DASHBOARD (index.html)
 // ==========================================
+
+// Intervalo do mercado real (guardado para poder cancelar)
+let realMarketInterval = null;
+
 function initDashboard() {
     const username = getUsername();
     if (!username) { window.location.href = 'login.html'; return; }
@@ -247,10 +251,22 @@ function initDashboard() {
     renderAtivos();
     atualizarTudo();
 
+    // Intervalo da simulação (roda sempre, mas só age quando não é modo real)
     setInterval(() => {
-        atualizarPrecos();
-        calcularPatrimonio();
+        if (document.getElementById('modoMercado').value !== 'real') {
+            atualizarPrecos();
+            calcularPatrimonio();
+        }
     }, 2000);
+
+    // Listener do seletor de mercado
+    document.getElementById('modoMercado').addEventListener('change', (e) => {
+        if (e.target.value === 'real') {
+            iniciarMercadoReal();
+        } else {
+            pararMercadoReal();
+        }
+    });
 }
 
 function atualizarAvatarTopbar() {
@@ -454,7 +470,88 @@ function getTendencia() {
     if (modo === "bear")      return -0.3;
     if (modo === "lateral")   return 0;
     if (modo === "aleatorio") return (Math.random() - 0.5) * 1.5;
-    return 0;
+    return 0; // "real" — preços vêm da API, não da simulação
+}
+
+// ==========================================
+// MERCADO REAL — brapi.dev (gratuito, sem chave)
+// ==========================================
+
+function setStatusMercado(texto, cor) {
+    const el = document.querySelector('.panel-header h2');
+    if (!el) return;
+    // Atualiza só o label de status sem quebrar o ícone
+    const statusId = 'market-status-label';
+    let span = document.getElementById(statusId);
+    if (!span) {
+        span = document.createElement('span');
+        span.id = statusId;
+        span.style.cssText = 'font-size:11px; font-weight:400; margin-left:8px; font-family:var(--mono);';
+        el.appendChild(span);
+    }
+    span.textContent = texto;
+    span.style.color = cor;
+}
+
+async function buscarPrecosReais() {
+    const tickers = ativos.map(a => a.nome).join(',');
+    const url = `https://brapi.dev/api/quote/${tickers}?interval=1d`;
+
+    setStatusMercado('⟳ atualizando...', 'var(--text-muted)');
+
+    try {
+        const res  = await fetch(url);
+        const data = await res.json();
+
+        if (!data.results || data.results.length === 0) {
+            setStatusMercado('⚠ sem dados', 'var(--danger)');
+            return;
+        }
+
+        data.results.forEach(result => {
+            const ativo = ativos.find(a => a.nome === result.symbol);
+            if (ativo && result.regularMarketPrice) {
+                const novoPreco = result.regularMarketPrice;
+                ativo.preco = novoPreco;
+                ativo.historico.push(novoPreco);
+                if (ativo.historico.length > 50) ativo.historico.shift();
+            }
+        });
+
+        atualizarPrecosNaTela();
+        calcularPatrimonio();
+
+        // Atualiza gráfico se estiver aberto
+        if (grafico && grafico.data.datasets[0].label) {
+            const ativoAtual = ativos.find(a => a.nome === grafico.data.datasets[0].label);
+            if (ativoAtual) {
+                grafico.data.labels = ativoAtual.historico.map((_, i) => i);
+                grafico.data.datasets[0].data = ativoAtual.historico;
+                grafico.update('none');
+            }
+        }
+
+        const agora = new Date().toLocaleTimeString('pt-BR');
+        setStatusMercado(`✔ atualizado às ${agora}`, 'var(--accent)');
+
+    } catch (err) {
+        console.error('Erro ao buscar preços reais:', err);
+        setStatusMercado('✖ erro de conexão', 'var(--danger)');
+    }
+}
+
+function iniciarMercadoReal() {
+    // Busca imediatamente e depois a cada 60s (respeita limite gratuito da API)
+    buscarPrecosReais();
+    realMarketInterval = setInterval(buscarPrecosReais, 60000);
+}
+
+function pararMercadoReal() {
+    clearInterval(realMarketInterval);
+    realMarketInterval = null;
+    // Remove o label de status
+    const span = document.getElementById('market-status-label');
+    if (span) span.remove();
 }
 
 // ==========================================
