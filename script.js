@@ -8,13 +8,13 @@ const formatMoney = (value) =>
     new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
 
 let ativosIniciais = [
-  { nome: "PETR4", preco: 30, icon: "🛢️", historico: [] },
-  { nome: "VALE3", preco: 60, icon: "⛏️", historico: [] },
-  { nome: "ITUB4", preco: 28, icon: "🏦", historico: [] },
-  { nome: "BBDC4", preco: 15, icon: "💳", historico: [] },
-  { nome: "ABEV3", preco: 13, icon: "🍺", historico: [] },
-  { nome: "WEGE3", preco: 40, icon: "⚙️", historico: [] },
-  { nome: "MGLU3", preco: 5,  icon: "🛍️", historico: [] }
+  { nome: "PETR4", preco: 47, icon: "🛢️", historico: [] },
+  { nome: "VALE3", preco: 58, icon: "⛏️", historico: [] },
+  { nome: "ITUB4", preco: 35, icon: "🏦", historico: [] },
+  { nome: "BBDC4", preco: 13, icon: "💳", historico: [] },
+  { nome: "ABEV3", preco: 12, icon: "🍺", historico: [] },
+  { nome: "WEGE3", preco: 51, icon: "⚙️", historico: [] },
+  { nome: "MGLU3", preco: 8,  icon: "🛍️", historico: [] }
 ];
 let ativos = JSON.parse(JSON.stringify(ativosIniciais));
 
@@ -495,7 +495,7 @@ function setStatusMercado(texto, cor) {
 
 async function buscarPrecosReais() {
     const tickers = ativos.map(a => a.nome).join(',');
-    const url = `https://brapi.dev/api/quote/${tickers}?interval=1d`;
+    const url = `https://brapi.dev/api/quote/${tickers}?interval=1d&currency=BRL`;
 
     setStatusMercado('⟳ atualizando...', 'var(--text-muted)');
 
