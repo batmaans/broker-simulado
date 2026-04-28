@@ -9,7 +9,7 @@ const formatMoney = (value) =>
 
 // ─── TOKEN DA API DE MERCADO REAL ─────────────────────────
 // Obtido gratuitamente em: https://brapi.dev
-const BRAPI_TOKEN = qGDLJb954uzwMSF7qnzYt2;
+const BRAPI_TOKEN = "qGDLJb954uzwMSF7qnzYt2";
 
 let ativosIniciais = [
   { nome: "PETR4", preco: 30, icon: "🛢️", historico: [] },
