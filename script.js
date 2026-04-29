@@ -1,17 +1,17 @@
 // ==========================================
 // VARIÁVEIS GLOBAIS E ESTADO
 // ==========================================
-let grafico;
-let currentUserData = null;
+let grafico; //let global para o gráfico, para poder atualizar os dados dinamicamente
+let currentUserData = null; // Cache do usuário logado para evitar leituras repetidas do localStorage (atualizado via saveUsers e saveUser)
 
-const formatMoney = (value) =>
-    new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
+const formatMoney = (value) => // Formatação de moeda brasileira
+    new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value); // Ex: formatMoney(1234.56) => "R$ 1.234,56"
 
 // ─── TOKEN DA API DE MERCADO REAL ─────────────────────────
 // Obtido gratuitamente em: https://brapi.dev
 const BRAPI_TOKEN = "qGDLJb954uzwMSF7qnzYt2";
 
-let ativosIniciais = [
+let ativosIniciais = [ // Lista de ativos disponíveis no mercado simulado
   { nome: "PETR4", preco: 30, icon: "🛢️", historico: [] },
   { nome: "VALE3", preco: 60, icon: "⛏️", historico: [] },
   { nome: "ITUB4", preco: 28, icon: "🏦", historico: [] },
@@ -35,15 +35,15 @@ document.addEventListener('DOMContentLoaded', () => {
 // HELPERS DE DADOS (LOCALSTORAGE)
 // ==========================================
 function getAllUsers() {
-    return JSON.parse(localStorage.getItem('users')) || {};
+    return JSON.parse(localStorage.getItem('users')) || {}; //json.parse para converter string de volta para objeto, e fallback para {} caso não exista nada no localStorage ainda.
 }
 
 function saveAllUsers(users) {
-    localStorage.setItem('users', JSON.stringify(users));
+    localStorage.setItem('users', JSON.stringify(users)); //json.stringify para converter objeto em string para armazenar no localStorage, que só aceita strings. O nome 'users' é a chave sob a qual os dados serão salvos.
 }
 
 function getUsername() {
-    return sessionStorage.getItem('currentUser');
+    return sessionStorage.getItem('currentUser'); //sessionStorage é usado para armazenar o nome do usuário logado durante a sessão. Ele é limpo quando a aba ou navegador é fechado, ao contrário do localStorage que persiste mesmo após fechar o navegador.
 }
 
 function getUser() {
@@ -54,10 +54,10 @@ function getUser() {
     if (!currentUserData) {
         currentUserData = getAllUsers()[getUsername()];
     }
-    return currentUserData;
+    return currentUserData; // Retorna os dados do usuário logado, usando cache para evitar leituras repetidas do localStorage. O cache é atualizado sempre que fazemos uma alteração via saveUsers ou saveUser.
 }
 
-function saveUsers() {
+function saveUsers() { // Usado após operações de compra/venda (atualiza via cache)
     // Usado no dashboard (atualiza via cache)
     const username = getUsername();
     if (username && currentUserData) {
@@ -67,7 +67,7 @@ function saveUsers() {
     }
 }
 
-function saveUser(data) {
+function saveUser(data) { // Usado para salvar mudanças feitas no perfil (atualiza direto, sem cache)
     // Usado no perfil (salva objeto direto)
     const all = getAllUsers();
     all[getUsername()] = data;
@@ -89,7 +89,7 @@ function showMsg(id, text, type) {
 // ==========================================
 // LOGIN (login.html)
 // ==========================================
-function initLogin() {
+function initLogin() { // Configura os listeners dos botões e links da página de login/cadastro
     document.querySelectorAll('.tab-btn').forEach(btn =>
         btn.addEventListener('click', (e) => switchTab(e.target.dataset.target))
     );
@@ -108,7 +108,7 @@ function initLogin() {
     document.getElementById('btn-forgot-step2').addEventListener('click', forgotStep2);
 }
 
-function switchTab(tab) {
+function switchTab(tab) { // Alterna entre as abas de login e cadastro
     document.querySelectorAll('.tab-btn').forEach(b =>
         b.classList.toggle('active', b.dataset.target === tab)
     );
@@ -122,13 +122,13 @@ function switchTab(tab) {
     });
 }
 
-function switchPanel(panel) {
+function switchPanel(panel) { // Alterna para o painel de "esqueci minha senha" ou volta para login
     ['panel-login', 'panel-register', 'panel-forgot'].forEach(id =>
         document.getElementById(id).classList.remove('active')
     );
     document.getElementById(`panel-${panel}`).classList.add('active');
 
-    if (panel === 'forgot') {
+    if (panel === 'forgot') { // Configura o painel de "esqueci minha senha" para o estado inicial
         document.getElementById('mainTabs').style.display = 'none';
         document.getElementById('forgot-step1').style.display = '';
         document.getElementById('forgot-step2').style.display = 'none';
@@ -143,7 +143,7 @@ function switchPanel(panel) {
     }
 }
 
-function doLogin() {
+function doLogin() { // Verifica as credenciais do usuário e, se corretas, salva o nome do usuário na sessionStorage e redireciona para o dashboard
     const u = document.getElementById('login-user').value.trim();
     const p = document.getElementById('login-pass').value;
     if (!u || !p) return showMsg('msg-login', 'Preencha usuário e senha.', 'err');
