@@ -22,13 +22,13 @@ O **Broker Pro+** é uma aplicação web educacional que simula o funcionamento 
 ## 🖥️ Screenshots
 
 ### Tela de Login / Cadastro
-![Login](login.png)
+![Login](assets/login.png)
 
 ### Dashboard — Mercado em Tempo Real
-![Dashboard](index.png)
+![Dashboard](assets/index.png)
 
 ### Perfil do Usuário
-![Perfil](profile.png)
+![Perfil](assets/profile.png)
 
 ---
 
